@@ -32,7 +32,7 @@ const Diary = () => {
   const [body, setBody] = useState("");
   const [editingDiaryId, setEditingDiaryId] = useState(null);
 
-  // 🔎 Filter states
+  // Filter states
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [filterMonth, setFilterMonth] = useState(null);
   const [filterYear, setFilterYear] = useState(null);

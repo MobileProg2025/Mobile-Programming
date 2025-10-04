@@ -32,7 +32,7 @@ const StatItem = ({ label, value, isLarge = false }) => (
 );
 
 //Profile
-const ProfileScreen = () => {
+const Profile = () => {
   const navigation = useNavigation();
   const router = useRouter();
 
@@ -255,4 +255,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileScreen;
+export default Profile;
