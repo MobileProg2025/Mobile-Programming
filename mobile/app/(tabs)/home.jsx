@@ -1,9 +1,9 @@
-import { View, Text, StyleSheet, FlatList, ScrollView } from "react-native";
-import React, { useState, useEffect } from "react";
-import { Ionicons, FontAwesome } from "@expo/vector-icons";
-import { Calendar } from "react-native-calendars";
-import { useRoute, useNavigation } from "@react-navigation/native";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { useEffect, useState } from "react";
+import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Calendar } from "react-native-calendars";
 
 const STORAGE_KEY = "my_diaries";
 

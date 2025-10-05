@@ -1,7 +1,6 @@
-import { Text } from "react-native";   // make sure this is imported
-import { FontAwesome, Ionicons } from "@expo/vector-icons";
-import { Tabs } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
+import { Text } from "react-native";
 
 export default function TabsLayout() {
   return (
@@ -74,7 +73,7 @@ export default function TabsLayout() {
           tabBarLabel: ({ focused, color }) =>
             focused ? (
               <Text style={{ color, fontSize: 10, fontWeight: "500" }}>
-                Media
+                Profile
               </Text>
             ) : null,
         }}

@@ -21,11 +21,11 @@ const MOCK_STATS = {
 
 
 const StatItem = ({ label, value, isLarge = false }) => (
-  <View style={[styles.statItem, isLarge ? styles.largeStatItem : styles.smallStatItem]}>
-    <Text style={isLarge ? styles.statValueLarge : styles.statValueSmall}>
+  <View style={[styles.statItem, isLarge ? styles.TotalEntriesStat : styles.StreakStat]}>
+    <Text style={isLarge ? styles.TotalEntriesValue : styles.StreakValue}>
       {value.toLocaleString()}
     </Text>
-    <Text style={isLarge ? styles.statLabelLarge : styles.statLabelSmall}>
+    <Text style={isLarge ? styles.TotalEntriesLabel : styles.StreakLabel}>
       {label}
     </Text>
   </View>
@@ -60,8 +60,7 @@ const Profile = () => {
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         
-        <Text style={styles.titleHeader}>PROFILE</Text>
-        <View style={styles.headerSeparator} />
+        <Text style={styles.Header}>PROFILE</Text>
 
         <View style={styles.profileSection}>
           <View style={styles.profileImageContainer}>
@@ -100,12 +99,12 @@ const Profile = () => {
           {/* Total Words Written */}
           <View style={styles.wordsWrittenContainer}>
             <Text style={styles.wordsWrittenText}>Total Words Written</Text>
-            <View style={styles.wordsWrittenSeparator} />
+            <View style={styles.wordsWrittenLine} />
           </View>
         </View>
 
         {/* Log Out */}
-        <View style={styles.logoutWrapper}>
+        <View style={styles.logoutContainer}>
             <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
               <MaterialCommunityIcons name="logout" size={24} color="black" /> 
               <Text style={styles.logoutText}>LOG OUT</Text>
@@ -116,7 +115,7 @@ const Profile = () => {
   );
 };
 
-// --- Stylesheet ---
+// Stylesheet
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
@@ -124,15 +123,14 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingHorizontal: 30,
-    paddingTop: 10,
+    padding: 15,
   },
-  titleHeader: {
-    marginTop: 30,
+  Header: {
+    marginTop: 40,
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
-    paddingVertical: 10,
+    marginBottom: 15,
     color: 'black'
   },
   headerSeparator: {
@@ -141,7 +139,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   
-  // Profile Section
   profileSection: {
     alignItems: "center",
     marginBottom: 40,
@@ -150,7 +147,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
-    backgroundColor: "#ccc", // Grey circle for profile image
+    backgroundColor: "#ccc", 
     marginBottom: 10,
   },
   username: {
@@ -162,7 +159,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 5,
-    borderBottomWidth: 1, // Line under the name
+    borderBottomWidth: 1, 
     borderColor: 'black',
     width: '30%',
     justifyContent: 'center',
@@ -182,45 +179,43 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginTop: 15,
   },
-  
   statItem: {
     alignItems: "center",
     justifyContent: 'center',
-    backgroundColor: '#ccc', // Grey background for stat blocks
+    backgroundColor: '#ccc', 
     borderRadius: 10,
   },
-  largeStatItem: {
+  TotalEntriesStat: {
     width: '100%', 
-    height: 120, // Tall block for Total Entries
+    height: 120, 
   },
-  smallStatItem: {
-    width: '48%', // Side-by-side for Day/Longest Streak
+  StreakStat: {
+    width: '48%', 
     height: 100,
   },
-  statValueLarge: {
+  TotalEntriesValue: {
     fontSize: 30,
     fontWeight: "bold",
     color: "black",
   },
-  statLabelLarge: {
+  TotalEntriesLabel: {
     fontSize: 16,
     color: "black",
     textAlign: 'center',
     marginTop: 5,
   },
-  statValueSmall: {
+  StreakValue: {
     fontSize: 24,
     fontWeight: "bold",
     color: "black",
   },
-  statLabelSmall: {
+  StreakLabel: {
     fontSize: 14,
     color: "black",
     textAlign: 'center',
     marginTop: 5,
   },
 
-  // Words Written
   wordsWrittenContainer: {
     alignItems: 'center',
     marginTop: 40,
@@ -230,20 +225,20 @@ const styles = StyleSheet.create({
     color: 'black',
     marginBottom: 5,
   },
-  wordsWrittenSeparator: {
-    width: '80%', // Line under words written
+  wordsWrittenLine: {
+    width: '80%', 
     height: 1,
     backgroundColor: 'black',
   },
 
-  // Log Out Button
-  logoutWrapper: {
+  
+  logoutContainer: {
     alignItems: 'center',
   },
   logoutButton: {
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 15,
+    paddingVertical: 50,
     paddingHorizontal: 20,
     justifyContent: 'center',
   },

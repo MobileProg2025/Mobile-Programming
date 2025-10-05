@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect, useState } from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
   FlatList,
   Image,
+  StyleSheet,
+  Text,
   TouchableOpacity,
+  View,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import Modal from "react-native-modal";
 
 const Media = () => {
@@ -49,26 +50,35 @@ const Media = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Media</Text>
+    <View style={styles.Header}> 
+      <Ionicons name="menu" size={35} color="black" />
+      <FontAwesome name="user-circle" size={35} color="grey" />
+    </View>
+    {media.length === 0 ?(
+      <View style = {styles.noImage}>
+        <Text style = {styles.noImageText}>No Image Available</Text>
+      </View>
+    ) : (
       <FlatList
-        data={Object.keys(groupedByMonth)}
-        keyExtractor={(item) => item}
-        renderItem={({ item }) => (
-          <View style={styles.monthGroup}>
-            <Text style={styles.monthTitle}>{item}</Text>
-            <View style={styles.grid}>
-              {groupedByMonth[item].map((img, idx) => (
-                <TouchableOpacity
-                  key={idx}
-                  onPress={() => setPreviewUri(img.uri)}
-                >
-                  <Image source={{ uri: img.uri }} style={styles.image} />
-                </TouchableOpacity>
-              ))}
+          data={Object.keys(groupedByMonth)}
+          keyExtractor={(item) => item}
+          renderItem={({ item }) => (
+            <View style={styles.monthGroup}>
+              <Text style={styles.monthTitle}>{item}</Text>
+              <View style={styles.grid}>
+                {groupedByMonth[item].map((img, idx) => (
+                  <TouchableOpacity
+                    key={idx}
+                    onPress={() => setPreviewUri(img.uri)}
+                  >
+                    <Image source={{ uri: img.uri }} style={styles.image} />
+                  </TouchableOpacity>
+                ))}
+              </View>
             </View>
-          </View>
-        )}
-      />
+          )}
+        />
+      )}
 
       {/* Fullscreen Preview */}
       <Modal isVisible={!!previewUri} onBackdropPress={() => setPreviewUri(null)}>
@@ -89,20 +99,67 @@ const Media = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "white", padding: 15 },
-  header: { fontSize: 22, fontWeight: "bold", marginBottom: 15, textAlign: "center" },
-  monthGroup: { marginBottom: 25 },
-  monthTitle: { fontSize: 18, fontWeight: "bold", marginBottom: 10 },
-  grid: { flexDirection: "row", flexWrap: "wrap", gap: 10 },
-  image: { width: 100, height: 100, borderRadius: 10 },
+  container: { 
+    flex: 1, 
+    backgroundColor: "white", 
+    paddingTop: 55, 
+    paddingHorizontal: 20 
+  }, 
+  monthGroup: { 
+    marginBottom: 25 
+  },
+  monthGroup: { 
+    marginBottom: 25 
+  },
+  Header: { 
+    flexDirection: "row", 
+    justifyContent: "space-between", 
+    alignItems: "center", 
+    marginBottom: 15 
+  },
+  monthTitle: { 
+    fontSize: 18, 
+    fontWeight: "bold", 
+    marginBottom: 10 
+  },
+  grid: { 
+    flexDirection: "row", 
+    flexWrap: "wrap", 
+    gap: 10 
+  },
+  image: { 
+    width: 100, 
+    height: 100, 
+    borderRadius: 10 
+  },
   previewModal: {
     flex: 1,
     backgroundColor: "rgba(0,0,0,0.9)",
     justifyContent: "center",
     alignItems: "center",
   },
-  previewImage: { width: "90%", height: "70%", resizeMode: "contain" },
-  closePreview: { position: "absolute", top: 40, right: 20 },
+
+  previewImage: { 
+    width: "90%", 
+    height: "70%", 
+    resizeMode: "contain" 
+  },
+  closePreview: { 
+    position: "absolute", 
+    top: 40, 
+    right: 20 
+  },
+  
+  noImage: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  noImageText: {
+    fontsize: 18,
+    fontWeight: '600',
+    color: 'grey',
+  }
 });
 
 export default Media;
