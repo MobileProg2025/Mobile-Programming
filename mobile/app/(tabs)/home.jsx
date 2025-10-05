@@ -2,7 +2,7 @@ import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
+import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Calendar } from "react-native-calendars";
 
 const STORAGE_KEY = "my_diaries";
@@ -138,7 +138,9 @@ const Home = () => {
       {/* Header */}
       <View style={styles.Header}>
         <Ionicons name="menu" size={35} color="black" />
-        <FontAwesome name="user-circle" size={35} color="grey" />
+        <TouchableOpacity onPress={() => navigation.navigate('profile')}>
+          <FontAwesome name="user-circle" size={35} color="grey" />
+        </TouchableOpacity>
       </View>
 
       {/* Calendar */}
@@ -201,20 +203,91 @@ const Home = () => {
 };
 
 const styles = StyleSheet.create({
-  Container: { backgroundColor: "white", flex: 1, paddingTop: 55, paddingHorizontal: 20 },
-  Header: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 15 },
-  Card: { backgroundColor: "#f4f4f4", borderRadius: 15, padding: 12, marginBottom: 20, shadowColor: "#000", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1, shadowRadius: 3, elevation: 2 },
-  SectionTitleCalendar: { fontSize: 20, fontWeight: "bold", marginBottom: 8, textAlign: "center" },
-  SectionTitleRecent: { fontSize: 20, fontWeight: "bold", marginBottom: 8 },
-  OnThisDayBox: { backgroundColor: "#f4f4f4", borderRadius: 12, padding: 12, marginBottom: 20 },
-  OnThisDayTitle: { fontSize: 20, fontWeight: "bold", marginBottom: 10 },
-  DiaryCard: { backgroundColor: "#fff", borderRadius: 10, padding: 10, marginBottom: 8, borderWidth: 1, borderColor: "#ddd" },
-  DiaryTitle: { fontSize: 16, fontWeight: "bold" },
-  DiaryDate: { fontSize: 12, color: "grey" },
-  RecentItem: { backgroundColor: "#fff", borderRadius: 10, padding: 10, marginBottom: 6, borderWidth: 1, borderColor: "#ddd" },
-  RecentTitle: { fontSize: 14, fontWeight: "bold", marginBottom: 2 },
-  RecentDate: { fontSize: 12, color: "grey" },
-  Placeholder: { fontSize: 14, color: "grey", fontStyle: "italic", textAlign: "center", paddingVertical: 20 },
+  Container: { 
+    backgroundColor: "white", 
+    flex: 1, 
+    paddingTop: 55, 
+    paddingHorizontal: 20 
+  },
+  Header: { 
+    flexDirection: "row", 
+    justifyContent: "space-between", 
+    alignItems: "center", 
+    marginBottom: 15 
+  },
+  Card: { 
+    backgroundColor: "#f4f4f4", 
+    borderRadius: 15, 
+    padding: 12, 
+    marginBottom: 20, 
+    shadowColor: "#000", 
+    shadowOffset: { width: 0, height: 2 }, 
+    shadowOpacity: 0.1, 
+    shadowRadius: 3, 
+    elevation: 2 
+  },
+  SectionTitleCalendar: { 
+    fontSize: 20, 
+    fontWeight: "bold", 
+    marginBottom: 8, 
+    textAlign: "center" 
+  },
+  SectionTitleRecent: { 
+    fontSize: 20, 
+    fontWeight: "bold", 
+    marginBottom: 8 
+  },
+  OnThisDayBox: { 
+    backgroundColor: "#f4f4f4", 
+    borderRadius: 12, 
+    padding: 12, 
+    marginBottom: 20 
+  },
+  OnThisDayTitle: { 
+    fontSize: 20, 
+    fontWeight: "bold", 
+    marginBottom: 10 
+  },
+  DiaryCard: { 
+    backgroundColor: "#fff", 
+    borderRadius: 10, 
+    padding: 10, 
+    marginBottom: 8, 
+    borderWidth: 1, 
+    borderColor: "#ddd" 
+  },
+  DiaryTitle: { 
+    fontSize: 16, 
+    fontWeight: "bold" 
+  },
+  DiaryDate: { 
+    fontSize: 12, 
+    color: "grey" 
+  },
+  RecentItem: { 
+    backgroundColor: "#fff", 
+    borderRadius: 10, 
+    padding: 10, 
+    marginBottom: 6, 
+    borderWidth: 1, 
+    borderColor: "#ddd" 
+  },
+  RecentTitle: { 
+    fontSize: 14, 
+    fontWeight: "bold", 
+    marginBottom: 2 
+  },
+  RecentDate: { 
+    fontSize: 12, 
+    color: "grey" 
+  },
+  Placeholder: { 
+    fontSize: 14, 
+    color: "grey", 
+    fontStyle: "italic", 
+    textAlign: "center", 
+    paddingVertical: 20 
+  },
 });
 
 export default Home;

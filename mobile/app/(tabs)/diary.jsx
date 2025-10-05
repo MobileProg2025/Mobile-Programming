@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Picker } from "@react-native-picker/picker";
+import { useNavigation } from "@react-navigation/native";
+import { useEffect, useState } from "react";
 import {
-  View,
-  Text,
+  Alert,
+  Dimensions,
+  FlatList,
   StyleSheet,
+  Text,
   TextInput,
   TouchableOpacity,
-  FlatList,
-  Dimensions,
-  Alert,
+  View,
 } from "react-native";
-import { Ionicons, FontAwesome } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import Modal from "react-native-modal";
-import { Picker } from "@react-native-picker/picker";
 
 const { width } = Dimensions.get("window");
 const CARD_MARGIN = 8;
@@ -164,7 +164,9 @@ const Diary = () => {
           {/* Header */}
           <View style={styles.Header}>
             <Ionicons name="menu" size={35} color="black" />
-            <FontAwesome name="user-circle" size={35} color="grey" />
+            <TouchableOpacity onPress={() => navigation.navigate('profile')}>
+              <FontAwesome name="user-circle" size={35} color="grey" />
+            </TouchableOpacity>
           </View>
 
           {/* Search */}

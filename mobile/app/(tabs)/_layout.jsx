@@ -67,17 +67,11 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="profile"
         options={{
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons name="person" size={25} color={color} />
-          ),
-          tabBarLabel: ({ focused, color }) =>
-            focused ? (
-              <Text style={{ color, fontSize: 10, fontWeight: "500" }}>
-                Profile
-              </Text>
-            ) : null,
+          title: 'Profile',
+          href: null, 
         }}
       />
+      
     </Tabs>
   );
 }

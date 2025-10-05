@@ -1,5 +1,4 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 import { useRouter } from 'expo-router';
 import {
   Alert,
@@ -33,7 +32,6 @@ const StatItem = ({ label, value, isLarge = false }) => (
 
 //Profile
 const Profile = () => {
-  const navigation = useNavigation();
   const router = useRouter();
 
   // Function to handle log out and redirect to the Login screen
@@ -182,7 +180,7 @@ const styles = StyleSheet.create({
   statItem: {
     alignItems: "center",
     justifyContent: 'center',
-    backgroundColor: '#ccc', 
+    backgroundColor: "#f4f4f4", 
     borderRadius: 10,
   },
   TotalEntriesStat: {
@@ -192,6 +190,7 @@ const styles = StyleSheet.create({
   StreakStat: {
     width: '48%', 
     height: 100,
+    backgroundColor: "#f4f4f4",
   },
   TotalEntriesValue: {
     fontSize: 30,

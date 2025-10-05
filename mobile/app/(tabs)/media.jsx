@@ -1,5 +1,6 @@
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import {
   FlatList,
@@ -12,6 +13,7 @@ import {
 import Modal from "react-native-modal";
 
 const Media = () => {
+  const navigation = useNavigation();
   const [media, setMedia] = useState([]);
   const [previewUri, setPreviewUri] = useState(null);
 
@@ -52,7 +54,9 @@ const Media = () => {
     <View style={styles.container}>
     <View style={styles.Header}> 
       <Ionicons name="menu" size={35} color="black" />
-      <FontAwesome name="user-circle" size={35} color="grey" />
+      <TouchableOpacity onPress={() => navigation.navigate('profile')}>
+          <FontAwesome name="user-circle" size={35} color="grey" />
+      </TouchableOpacity>
     </View>
     {media.length === 0 ?(
       <View style = {styles.noImage}>
