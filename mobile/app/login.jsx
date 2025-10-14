@@ -1,7 +1,7 @@
-import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
 import { FontAwesome } from '@expo/vector-icons'
 import { Link, useRouter } from 'expo-router'
+import { useState } from 'react'
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
 const Login = () => {
   const [securePassword, setSecurePassword] = useState(true)

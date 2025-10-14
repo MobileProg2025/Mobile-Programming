@@ -23,7 +23,6 @@ const Media = () => {
         const saved = await AsyncStorage.getItem("diaries");
         if (saved) {
           const diaries = JSON.parse(saved);
-          // collect all images
           const allImages = diaries.flatMap((d) =>
             (d.images || []).map((uri) => ({
               uri,
@@ -109,9 +108,6 @@ const styles = StyleSheet.create({
     paddingTop: 55, 
     paddingHorizontal: 20 
   }, 
-  monthGroup: { 
-    marginBottom: 25 
-  },
   monthGroup: { 
     marginBottom: 25 
   },

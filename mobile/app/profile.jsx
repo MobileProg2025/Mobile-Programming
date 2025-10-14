@@ -113,7 +113,7 @@ const Profile = () => {
   );
 };
 
-// Stylesheet
+
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
@@ -131,12 +131,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     color: 'black'
   },
-  headerSeparator: {
-    height: 1,
-    backgroundColor: 'black',
-    marginBottom: 20,
-  },
-  
   profileSection: {
     alignItems: "center",
     marginBottom: 40,
@@ -168,7 +162,8 @@ const styles = StyleSheet.create({
     color: "black",
     marginLeft: 5,
   },
-
+  
+  //Stats
   statsContainer: {
     marginBottom: 40,
   },
@@ -190,7 +185,6 @@ const styles = StyleSheet.create({
   StreakStat: {
     width: '48%', 
     height: 100,
-    backgroundColor: "#f4f4f4",
   },
   TotalEntriesValue: {
     fontSize: 30,
@@ -214,15 +208,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 5,
   },
+  
 
   wordsWrittenContainer: {
     alignItems: 'center',
     marginTop: 40,
-  },
-  wordsWrittenText: {
-    fontSize: 14,
-    color: 'black',
-    marginBottom: 5,
   },
   wordsWrittenLine: {
     width: '80%', 

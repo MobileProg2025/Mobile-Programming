@@ -1,8 +1,8 @@
-import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import { FontAwesome } from '@expo/vector-icons';
+import { Link } from 'expo-router';
+import { useState } from 'react';
+import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { CountryPicker } from "react-native-country-codes-picker";
-import { FontAwesome } from '@expo/vector-icons'
-import { Link } from 'expo-router'
 
 const Signup = () => {
   const [securePassword, setSecurePassword] = useState(true)
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   },
   HomeLogoContainer: {
     marginTop: 70,
-    marginHorizontal: "145",
+    alignItems: 'center',
   },
   HomeLogo: {
     position: "absolute",
@@ -236,7 +236,6 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderWidth: 1,
     borderColor: '#E0E0E0',
-    borderRadius: 10,
   },
   passwordIcon: {
     marginLeft: 5,
