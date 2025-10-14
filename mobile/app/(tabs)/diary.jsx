@@ -158,12 +158,14 @@ const Diary = () => {
   });
 
   return (
-    <View style={styles.Container}>
+    <View style={styles.container}>
       {mode === "list" ? (
         <>
           {/* Header */}
           <View style={styles.Header}>
-            <Ionicons name="menu" size={35} color="black" />
+            <TouchableOpacity onPress= {() => navigation.navigate('menu')}>
+              <Ionicons name="menu" size={35} color="black" />
+            </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('profile')}>
               <FontAwesome name="user-circle" size={35} color="grey" />
             </TouchableOpacity>
@@ -373,39 +375,175 @@ const Diary = () => {
 };
 
 const styles = StyleSheet.create({
-  Container: { flex: 1, backgroundColor: "white", paddingTop: 55, paddingHorizontal: 20 },
-  Header: { flexDirection: "row", justifyContent: "space-between", marginBottom: 15 },
-  SearchRow: { flexDirection: "row", alignItems: "center", marginBottom: 15 },
-  SearchBar: { flex: 1, borderWidth: 1, borderColor: "grey", borderRadius: 10, paddingHorizontal: 12, paddingVertical: 15 },
-  SectionHeaderRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 12 },
-  SectionTitle: { fontSize: 25, fontWeight: "bold" },
-  ActionButtons: { flexDirection: "row", alignItems: "center" },
-  IconButton: { padding: 8, marginLeft: 5 },
-  DiaryCard: { backgroundColor: "#f4f4f4", borderRadius: 12, padding: 15, marginBottom: 12 },
-  CardActions: { flexDirection: "row", marginTop: 10, justifyContent: "flex-end" },
-  ListCard: { width: "100%" },
-  GridCard: { width: GRID_CARD_WIDTH },
-  DiaryTitle: { fontSize: 16, fontWeight: "bold", marginBottom: 5 },
-  DiaryDate: { fontSize: 12, color: "grey" },
-  AddButton: { position: "absolute", bottom: 25, right: 25, backgroundColor: "#066AFF", width: 55, height: 55, borderRadius: 30, justifyContent: "center", alignItems: "center", elevation: 4 },
+  container: { 
+    flex: 1, 
+    backgroundColor: "white", 
+    paddingTop: 55, 
+    paddingHorizontal: 20 
+  }, 
+  Header: { 
+    flexDirection: "row", 
+    justifyContent: "space-between", 
+    marginBottom: 15, 
+  },
+  SearchRow: { 
+    flexDirection: "row", 
+    alignItems: "center", 
+    marginBottom: 15, 
+  },
+  SearchBar: { 
+    flex: 1, 
+    borderWidth: 1, 
+    borderColor: "#E0E0E0", 
+    borderRadius: 10, 
+    paddingHorizontal: 15, 
+    paddingVertical: 15,
+    fontsize: 15,
+  },
+  SectionHeaderRow: { 
+    flexDirection: "row", 
+    justifyContent: "space-between", 
+    alignItems: "center", 
+    marginBottom: 15, 
+  },
+  SectionTitle: { 
+    fontSize: 20, 
+    fontWeight: "bold",
+    color: 'black',
+  },
+  ActionButtons: { 
+    flexDirection: "row", 
+    alignItems: "center"
+  },
+  IconButton: { 
+    padding: 8, 
+    marginLeft: 10, 
+  },
+  DiaryCard: { 
+    backgroundColor: "#f4f4f4", 
+    borderRadius: 10, 
+    padding: 15, 
+    marginBottom: 15, 
+  },
+  CardActions: { 
+    flexDirection: "row", 
+    marginTop: 10, 
+    justifyContent: "flex-end",
+  },
+  ListCard: { 
+    width: "100%" 
+  },
+  GridCard: { 
+    width: GRID_CARD_WIDTH,
+  },
+  DiaryTitle: { 
+    fontSize: 16, 
+    fontWeight: "bold", 
+    marginBottom: 5,
+    color: 'black',
+  },
+  DiaryDate: { 
+    fontSize: 12, 
+    color: "#808080",
+  },
+  AddButton: { 
+    position: "absolute", 
+    bottom: 25, 
+    right: 25, 
+    backgroundColor: "#066AFF", 
+    width: 50, 
+    height: 50, 
+    borderRadius: 25, 
+    justifyContent: "center", 
+    alignItems: "center", 
+    elevation: 4, 
+  },
 
   // New Diary form
-  Form: { flex: 1, justifyContent: "flex-start" },
-  FormHeader: { fontSize: 22, fontWeight: "bold", marginBottom: 20 },
-  Input: { backgroundColor: "#f4f4f4", padding: 15, borderRadius: 10, marginBottom: 15 },
-  BodyInput: { backgroundColor: "#f4f4f4", padding: 15, borderRadius: 10, flex: 1, textAlignVertical: "top", marginBottom: 15 },
-  ButtonRow: { flexDirection: "row", justifyContent: "flex-end", marginBottom: 20 },
-  SmallButton: { paddingVertical: 10, paddingHorizontal: 20, borderRadius: 8, marginLeft: 10 },
-  SmallButtonText: { color: "white", fontWeight: "bold", fontSize: 14 },
+  Form: { 
+    flex: 1, 
+    justifyContent: "flex-start",
+  },
+  FormHeader: { 
+    fontSize: 20, 
+    fontWeight: "bold", 
+    marginBottom: 20,
+    color: 'black',
+  },
+  Input: { 
+    backgroundColor: "#f4f4f4", 
+    padding: 15, 
+    borderRadius: 10, 
+    marginBottom: 15,
+    fontSize: 15,
+    color: 'black',
+  },
+  BodyInput: { 
+    backgroundColor: "#f4f4f4", 
+    padding: 15, 
+    borderRadius: 10, 
+    flex: 1, 
+    textAlignVertical: "top", 
+    marginBottom: 15,
+    fontSize: 15,
+    color: 'black',
+  },
+  ButtonRow: { 
+    flexDirection: "row", 
+    justifyContent: "flex-end", 
+    marginBottom: 20 
+  },
+  SmallButton: { 
+    paddingVertical: 10, 
+    paddingHorizontal: 20, 
+    borderRadius: 10, 
+    marginLeft: 10 
+  },
+  SmallButtonText: { 
+    color: "white", 
+    fontWeight: "bold", 
+    fontSize: 15,
+  },
 
   // Modal
-  Modal: { justifyContent: "flex-end", margin: 0 },
-  ModalContent: { backgroundColor: "white", padding: 20, borderTopLeftRadius: 20, borderTopRightRadius: 20 },
-  ModalTitle: { fontSize: 18, fontWeight: "bold", marginBottom: 10 },
-  PickerLabel: { fontSize: 14, marginTop: 10, fontWeight: "600" },
-  FilterButtons: { flexDirection: "row", justifyContent: "flex-end", marginTop: 20 },
-  FilterBtn: { paddingVertical: 10, paddingHorizontal: 20, borderRadius: 8, marginLeft: 10 },
-  FilterBtnText: { color: "white", fontWeight: "bold" },
+  Modal: { 
+    justifyContent: "flex-end", 
+    margin: 0 
+  },
+  ModalContent: { 
+    backgroundColor: "white", 
+    padding: 20, 
+    borderTopLeftRadius: 10, 
+    borderTopRightRadius: 10, 
+  },
+  ModalTitle: { 
+    fontSize: 18, 
+    fontWeight: "bold", 
+    marginBottom: 15,
+    color: 'black', 
+  },
+  PickerLabel: { 
+    fontSize: 15, 
+    marginTop: 10, 
+    fontWeight: "600",
+    color: 'black',
+   },
+  FilterButtons: { 
+    flexDirection: "row", 
+    justifyContent: "flex-end", 
+    marginTop: 20 
+  },
+  FilterBtn: { 
+    paddingVertical: 10, 
+    paddingHorizontal: 20, 
+    borderRadius: 10, 
+    marginLeft: 10 
+  },
+  FilterBtnText: { 
+    color: "white", 
+    fontWeight: "bold", 
+    fontSize: 15,
+  },
 });
 
 export default Diary;

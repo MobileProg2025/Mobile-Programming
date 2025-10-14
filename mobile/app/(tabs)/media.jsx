@@ -51,10 +51,12 @@ const Media = () => {
 
   return (
     <View style={styles.container}>
-    <View style={styles.Header}> 
-      <Ionicons name="menu" size={35} color="black" />
+    <View style={styles.Header}>
+      <TouchableOpacity onPress= {() => navigation.navigate('menu')}>
+        <Ionicons name="menu" size={35} color="black" />
+      </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('profile')}>
-          <FontAwesome name="user-circle" size={35} color="grey" />
+        <FontAwesome name="user-circle" size={35} color="grey" />
       </TouchableOpacity>
     </View>
     {media.length === 0 ?(
@@ -65,23 +67,24 @@ const Media = () => {
       <FlatList
           data={Object.keys(groupedByMonth)}
           keyExtractor={(item) => item}
+          contentContainerStyle={styles.flatListContent}
           renderItem={({ item }) => (
             <View style={styles.monthGroup}>
               <Text style={styles.monthTitle}>{item}</Text>
               <View style={styles.grid}>
                 {groupedByMonth[item].map((img, idx) => (
                   <TouchableOpacity
-                    key={idx}
-                    onPress={() => setPreviewUri(img.uri)}
-                  >
+                  key={idx}
+                  onPress={() => setPreviewUri(img.uri)}
+                  style={styles.imageWrapper} >
                     <Image source={{ uri: img.uri }} style={styles.image} />
                   </TouchableOpacity>
-                ))}
+                  ))}
+                </View>\
               </View>
-            </View>
-          )}
-        />
-      )}
+            )}
+          />
+        )}
 
       {/* Fullscreen Preview */}
       <Modal isVisible={!!previewUri} onBackdropPress={() => setPreviewUri(null)}>
@@ -128,9 +131,9 @@ const styles = StyleSheet.create({
     gap: 10 
   },
   image: { 
-    width: 100, 
-    height: 100, 
-    borderRadius: 10 
+    width: '100%', 
+    height: '100%',
+    borderRadius: 10, 
   },
   previewModal: {
     flex: 1,
@@ -142,12 +145,12 @@ const styles = StyleSheet.create({
   previewImage: { 
     width: "90%", 
     height: "70%", 
-    resizeMode: "contain" 
+    resizeMode: "contain",
   },
   closePreview: { 
     position: "absolute", 
     top: 40, 
-    right: 20 
+    right: 20, 
   },
   
   noImage: {
@@ -158,7 +161,7 @@ const styles = StyleSheet.create({
   noImageText: {
     fontsize: 18,
     fontWeight: '600',
-    color: 'grey',
+    color: '#808080',
   }
 });
 

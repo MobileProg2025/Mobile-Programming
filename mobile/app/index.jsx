@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   HomeLogo: {
     marginTop: 200,
-    marginHorizontal: "85",
+    alignSelf: "center",
     width: 200,
     height: 200,
   },
@@ -56,25 +56,29 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     marginHorizontal: 30,
     marginTop: 40,
-    borderRadius: 11,
+    borderRadius: 10,
     paddingVertical: 15,
     alignItems: "center",
     elevation: 2,
   },
   loginButtonText: {
     color: "white",
+    fontWeight: "600",
+    fontsize: 15,
   },
   signupButton: {
     backgroundColor: "#3C3148",
     marginHorizontal: 30,
     marginTop: 20,
-    borderRadius: 11,
+    borderRadius: 10,
     paddingVertical: 15,
     alignItems: "center",
     elevation: 2,
   },
   signupButtonText: {
     color: "white",
+    fontWeight: "600",
+    fontSize: 15,
   },
 })
 

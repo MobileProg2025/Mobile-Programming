@@ -99,7 +99,7 @@ const Home = () => {
       navigation.setParams({ updatedDiary: undefined });
     }
 
-    // DELETE (resync from storage)
+    // DELETE 
     if (route.params?.deletedDiaryId) {
       const syncAfterDelete = async () => {
         try {
@@ -134,17 +134,19 @@ const Home = () => {
   const diariesForDay = diaries.filter((d) => d.date === selected);
 
   return (
-    <ScrollView style={styles.Container} contentContainerStyle={{ flexGrow: 1, paddingBottom: 50 }}>
+    <ScrollView style={styles.container} contentContainerStyle={{ flexGrow: 1, paddingBottom: 50 }}>
       {/* Header */}
       <View style={styles.Header}>
-        <Ionicons name="menu" size={35} color="black" />
+        <TouchableOpacity onPress= {() => navigation.navigate('menu')}>
+          <Ionicons name="menu" size={35} color="black" />
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('profile')}>
           <FontAwesome name="user-circle" size={35} color="grey" />
         </TouchableOpacity>
       </View>
 
       {/* Calendar */}
-      <View style={[styles.Card, diariesForDay.length > 0 && { marginBottom: 10 }]}>
+      <View style={styles.Card}> 
         <Text style={styles.SectionTitleCalendar}>Calendar</Text>
         <Calendar
           onDayPress={(day) => setSelected(day.dateString)}
@@ -203,90 +205,100 @@ const Home = () => {
 };
 
 const styles = StyleSheet.create({
-  Container: { 
-    backgroundColor: "white", 
+  container: { 
     flex: 1, 
+    backgroundColor: "white", 
     paddingTop: 55, 
     paddingHorizontal: 20 
-  },
+  }, 
   Header: { 
     flexDirection: "row", 
     justifyContent: "space-between", 
     alignItems: "center", 
-    marginBottom: 15 
+    marginBottom: 15,
   },
   Card: { 
     backgroundColor: "#f4f4f4", 
-    borderRadius: 15, 
-    padding: 12, 
+    borderRadius: 10, 
+    padding: 15, 
     marginBottom: 20, 
     shadowColor: "#000", 
     shadowOffset: { width: 0, height: 2 }, 
-    shadowOpacity: 0.1, 
-    shadowRadius: 3, 
-    elevation: 2 
+    shadowOpacity: 0.5, 
+    shadowRadius: 5, 
+    elevation: 2, 
   },
   SectionTitleCalendar: { 
     fontSize: 20, 
     fontWeight: "bold", 
-    marginBottom: 8, 
-    textAlign: "center" 
+    marginBottom: 10, 
+    textAlign: "center",
+    color: 'black',
   },
   SectionTitleRecent: { 
     fontSize: 20, 
     fontWeight: "bold", 
-    marginBottom: 8 
+    marginBottom: 10,
+    color: 'black', 
   },
   OnThisDayBox: { 
     backgroundColor: "#f4f4f4", 
-    borderRadius: 12, 
-    padding: 12, 
-    marginBottom: 20 
+    borderRadius: 10, 
+    padding: 15, 
+    marginBottom: 20,
+    shadowColor: "#000", 
+    shadowOffset: { width: 0, height: 2 }, 
+    shadowOpacity: 0.05, 
+    shadowRadius: 5, 
+    elevation: 2, 
   },
   OnThisDayTitle: { 
     fontSize: 20, 
     fontWeight: "bold", 
-    marginBottom: 10 
+    marginBottom: 10,
+    color: 'black',
   },
   DiaryCard: { 
     backgroundColor: "#fff", 
     borderRadius: 10, 
-    padding: 10, 
-    marginBottom: 8, 
+    padding: 15, 
+    marginBottom: 10, 
     borderWidth: 1, 
-    borderColor: "#ddd" 
+    borderColor: "#E0E0E0", 
   },
   DiaryTitle: { 
     fontSize: 16, 
-    fontWeight: "bold" 
+    fontWeight: "bold",
+    color: 'black',
   },
   DiaryDate: { 
     fontSize: 12, 
-    color: "grey" 
+    color: "#808080",
   },
   RecentItem: { 
     backgroundColor: "#fff", 
     borderRadius: 10, 
-    padding: 10, 
-    marginBottom: 6, 
+    padding: 15, 
+    marginBottom: 10, 
     borderWidth: 1, 
-    borderColor: "#ddd" 
+    borderColor: "#E0E0E0",
   },
   RecentTitle: { 
-    fontSize: 14, 
+    fontSize: 16, 
     fontWeight: "bold", 
-    marginBottom: 2 
+    marginBottom: 5,
+    color: 'black',
   },
   RecentDate: { 
     fontSize: 12, 
-    color: "grey" 
+    color: "#808080" ,
   },
   Placeholder: { 
-    fontSize: 14, 
-    color: "grey", 
+    fontSize: 15, 
+    color: "#808080", 
     fontStyle: "italic", 
     textAlign: "center", 
-    paddingVertical: 20 
+    paddingVertical: 20, 
   },
 });
 

@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     borderWidth: 1,
     borderColor: "#E0E0E0",
-    borderRadius: 11.84,
+    borderRadius: 10,
     paddingHorizontal: 10,
     paddingVertical: 5,
     elevation: 2,
@@ -181,10 +181,12 @@ const styles = StyleSheet.create({
   countryCodeText: {
     fontSize: 16,
     fontWeight: "500",
+    paddingVertical: 10,
   },
   numberInput: {
     flex: 1,
     fontSize: 15,
+    paddingVertical: 10,
   },
   emailContainer: {
     marginTop: 10,
@@ -198,7 +200,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     flexDirection: "row",
     alignItems: "center",
-    borderRadius: 11.84,
+    borderRadius: 10,
     marginHorizontal: 30,
     marginVertical: 5,
     elevation: 2,
@@ -209,6 +211,7 @@ const styles = StyleSheet.create({
   },
   emailAddressIcon: {
     marginLeft: 5,
+    color: "#000",
   },
   emailAddressInput: {
     flex: 1,
@@ -217,7 +220,7 @@ const styles = StyleSheet.create({
   },
 
   passContainer: {
-    marginTop: 10,
+    marginTop: 15,
   },
   passwordText: {
     fontSize: 15,
@@ -228,7 +231,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     flexDirection: "row",
     alignItems: "center",
-    borderRadius: 11.84,
+    borderRadius: 10,
     marginHorizontal: 30,
     marginVertical: 5,
     elevation: 2,
@@ -239,6 +242,7 @@ const styles = StyleSheet.create({
   },
   passwordIcon: {
     marginLeft: 5,
+    color: '#000',
   },
   passwordInput: {
     flex: 1,
@@ -250,7 +254,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: 'red',
-    fontSize: 13,
+    fontSize: 14,
     marginLeft: 30,
     marginTop: 5,
   },
@@ -266,6 +270,7 @@ const styles = StyleSheet.create({
   loginButtonText: {
     color: "white",
     fontWeight: "600",
+    fontSize: 15,
   },
   signupTextContainer: {
     flexDirection: "row",

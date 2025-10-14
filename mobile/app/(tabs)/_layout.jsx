@@ -15,6 +15,7 @@ export default function TabsLayout() {
           height: 80,
           paddingBottom: 30,
           paddingTop: 15,
+          backgroundColor: 'white',        
         },
         tabBarBadgeStyle: {
           fontSize: 12,
@@ -64,13 +65,7 @@ export default function TabsLayout() {
             ) : null,
         }}
       />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: 'Profile',
-          href: null, 
-        }}
-      />
+      
       
     </Tabs>
   );

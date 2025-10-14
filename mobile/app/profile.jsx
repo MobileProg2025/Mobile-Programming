@@ -1,4 +1,4 @@
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { FontAwesome, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useRouter } from 'expo-router';
 import {
   Alert,
@@ -62,7 +62,7 @@ const Profile = () => {
 
         <View style={styles.profileSection}>
           <View style={styles.profileImageContainer}>
-            {/* The image is shown as a grey circle in the wireframe */}
+            <FontAwesome name="user-circle" size={100} color="#808080" />
           </View>
           <Text style={styles.username}>{MOCK_STATS.username}</Text>
           <TouchableOpacity style={styles.editNameButton}>
@@ -73,14 +73,14 @@ const Profile = () => {
 
         {/* Journal Stats Section */}
         <View style={styles.statsContainer}>
-          {/* Total Entries (Large block) */}
+          {/* Total Entries */}
           <StatItem 
             label="Total Entries" 
             value={MOCK_STATS.totalEntries} 
             isLarge={true} 
           />
           
-          {/* Day Streak and Longest Streak (Side-by-side) */}
+          {/* Day Streak and Longest Streak */}
           <View style={styles.statsRowTwo}>
             <StatItem 
               label="Day Streak" 
@@ -119,12 +119,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
   },
-  container: {
-    flex: 1,
-    padding: 15,
-  },
+  container: { 
+    flex: 1, 
+    backgroundColor: "white", 
+    paddingTop: 55, 
+    paddingHorizontal: 20 
+  }, 
   Header: {
-    marginTop: 40,
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
@@ -139,13 +140,14 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
-    backgroundColor: "#ccc", 
+    backgroundColor: "#ffffffff", 
     marginBottom: 10,
   },
   username: {
     fontSize: 20,
     fontWeight: "600",
     marginTop: 5,
+    color: 'black',
   },
   editNameButton: {
     flexDirection: 'row',
@@ -192,7 +194,7 @@ const styles = StyleSheet.create({
     color: "black",
   },
   TotalEntriesLabel: {
-    fontSize: 16,
+    fontSize: 15,
     color: "black",
     textAlign: 'center',
     marginTop: 5,
@@ -209,10 +211,15 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   
-
+  //Total Words
   wordsWrittenContainer: {
     alignItems: 'center',
     marginTop: 40,
+  },
+  wordsWrittenText: {
+    fontsize: 15,
+    color: 'black',
+    marginBottom: 5,
   },
   wordsWrittenLine: {
     width: '80%', 
@@ -220,19 +227,20 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
 
-  
+  //Logout
   logoutContainer: {
     alignItems: 'center',
+    marginTop: 40,
   },
   logoutButton: {
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 50,
+    paddingVertical: 15,
     paddingHorizontal: 20,
     justifyContent: 'center',
   },
   logoutText: {
-    fontSize: 18,
+    fontSize: 15,
     color: "black",
     fontWeight: "600",
     marginLeft: 5,
