@@ -20,7 +20,6 @@ const Menu = () => {
         </TouchableOpacity>
         
       </View>
-   
   );
 };
 
@@ -33,14 +32,9 @@ const styles = StyleSheet.create({
     paddingTop: 55, 
     paddingHorizontal: 20, 
   },
-  container: {
-    flex: 1,
-    padding: 20,
-    paddingTop: 0,
-  },
   HeaderText: {
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: 'bold',
     marginBottom: 15,
     color: 'black'
@@ -49,12 +43,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 15,
+    marginTop: 10,
+    paddingVertical: 20,
     borderBottomWidth: 1,
     borderBottomColor: '#f0f0f0',
   },
   optionText: {
-    fontSize: 18,
+    fontSize: 19,
     color: 'black',
   },
 });
