@@ -10,11 +10,11 @@ export default function TabsLayout() {
         tabBarActiveTintColor: "#066AFF",
         tabBarInactiveTintColor: "grey",
         tabBarStyle: {
-          borderTopWidth: 0.5,
+          borderTopWidth: 0.3,
           borderTopColor: "grey",
-          height: 80,
+          height: 70,
           paddingBottom: 30,
-          paddingTop: 15,
+          paddingTop: 10,
           backgroundColor: 'white',        
         },
         tabBarBadgeStyle: {
@@ -46,7 +46,7 @@ export default function TabsLayout() {
           tabBarLabel: ({ focused, color }) =>
             focused ? (
               <Text style={{ color, fontSize: 10, fontWeight: "500" }}>
-                Notes
+                Diary
               </Text>
             ) : null,
         }}

@@ -252,7 +252,7 @@ const Diary = () => {
               </View>
             )}
             ListEmptyComponent={
-              <View style={styles.DiaryCard}>
+              <View style={styles.DiaryCardEmpty}>
                 <Text style={{ color: "grey" }}>
                   {searchQuery ? "No diaries found" : "No diaries yet"}
                 </Text>
@@ -398,7 +398,9 @@ const styles = StyleSheet.create({
     borderRadius: 10, 
     paddingHorizontal: 15, 
     paddingVertical: 15,
-    fontsize: 15,
+    fontSize: 15,
+    borderWidth: 0.5,           
+    borderColor: "#066AFF"
   },
   SectionHeaderRow: { 
     flexDirection: "row", 
@@ -420,10 +422,18 @@ const styles = StyleSheet.create({
     marginLeft: 10, 
   },
   DiaryCard: { 
-    backgroundColor: "#f4f4f4", 
+    backgroundColor: "#f2f4f8ff", 
     borderRadius: 10, 
     padding: 15, 
     marginBottom: 15, 
+    borderWidth: 0.5,           
+    borderColor: "#066AFF"
+  },
+  DiaryCardEmpty: { 
+    backgroundColor: "#f2f4f8ff", 
+    borderRadius: 10, 
+    padding: 15, 
+    marginBottom: 15,
   },
   CardActions: { 
     flexDirection: "row", 

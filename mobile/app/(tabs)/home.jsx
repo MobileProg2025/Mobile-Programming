@@ -164,13 +164,13 @@ const Home = () => {
               : {}),
           }}
           theme={{ todayTextColor: "#066AFF", selectedDayBackgroundColor: "#066AFF", arrowColor: "#066AFF" }}
-          style={{ borderRadius: 10, elevation: 2 }}
+          style={{ borderRadius: 10, elevation: 1, borderWidth: 0.5, borderColor: "#066AFF"}}
         />
       </View>
 
       {/* On This Day */}
       {diariesForDay.length > 0 && (
-        <View style={styles.OnThisDayBox}>
+        <View style={styles.Card}>
           <Text style={styles.OnThisDayTitle}>On this day</Text>
           <FlatList
             data={diariesForDay}
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     flex: 1, 
     backgroundColor: "white", 
     paddingTop: 55, 
-    paddingHorizontal: 20 
+    paddingHorizontal: 20,
   }, 
   Header: { 
     flexDirection: "row", 
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   Card: { 
-    backgroundColor: "#f4f4f4", 
+    backgroundColor: "#f2f4f8ff", 
     borderRadius: 10, 
     padding: 15, 
     marginBottom: 20, 
@@ -226,7 +226,9 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 }, 
     shadowOpacity: 0.5, 
     shadowRadius: 5, 
-    elevation: 2, 
+    //elevation: 2, 
+    borderWidth: 0.5,           
+    borderColor: "#066AFF"
   },
   SectionTitleCalendar: { 
     fontSize: 20, 
@@ -241,17 +243,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     color: 'black', 
   },
-  OnThisDayBox: { 
-    backgroundColor: "#f4f4f4", 
-    borderRadius: 10, 
-    padding: 15, 
-    marginBottom: 20,
-    shadowColor: "#000", 
-    shadowOffset: { width: 0, height: 2 }, 
-    shadowOpacity: 0.05, 
-    shadowRadius: 5, 
-    elevation: 2, 
-  },
   OnThisDayTitle: { 
     fontSize: 20, 
     fontWeight: "bold", 
@@ -265,6 +256,8 @@ const styles = StyleSheet.create({
     marginBottom: 10, 
     borderWidth: 1, 
     borderColor: "#E0E0E0", 
+    borderWidth: 0.5,           
+    borderColor: "#066AFF"
   },
   DiaryTitle: { 
     fontSize: 16, 
@@ -282,6 +275,8 @@ const styles = StyleSheet.create({
     marginBottom: 10, 
     borderWidth: 1, 
     borderColor: "#E0E0E0",
+    borderWidth: 0.5,           
+    borderColor: "#066AFF"
   },
   RecentTitle: { 
     fontSize: 16, 
