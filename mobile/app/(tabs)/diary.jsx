@@ -94,7 +94,7 @@ const Diary = () => {
         prev.map((d) => (d.id === editingDiaryId ? { ...d, ...updatedDiary } : d))
       );
 
-      navigation.navigate("home", { updatedDiary });
+
     } else {
       const now = new Date();
       const newDiary = {
@@ -107,7 +107,6 @@ const Diary = () => {
 
       setDiaries((prev) => [newDiary, ...prev]);
 
-      navigation.navigate("home", { newDiary });
     }
 
     setTitle("");
@@ -129,7 +128,7 @@ const Diary = () => {
       await AsyncStorage.removeItem(STORAGE_KEY);
     }
 
-    navigation.navigate("home", { deletedDiaryId: id, date });
+
   };
 
   // Edit diary
@@ -377,7 +376,7 @@ const Diary = () => {
 const styles = StyleSheet.create({
   container: { 
     flex: 1, 
-    backgroundColor: "white", 
+    backgroundColor: "#fbfcffff", 
     paddingTop: 55, 
     paddingHorizontal: 20 
   }, 
@@ -394,13 +393,12 @@ const styles = StyleSheet.create({
   SearchBar: { 
     flex: 1, 
     borderWidth: 1, 
-    borderColor: "#E0E0E0", 
     borderRadius: 10, 
     paddingHorizontal: 15, 
     paddingVertical: 15,
     fontSize: 15,
-    borderWidth: 0.5,           
-    borderColor: "#066AFF"
+    borderWidth: 0.7,           
+    borderColor: "#006989"
   },
   SectionHeaderRow: { 
     flexDirection: "row", 
@@ -422,12 +420,12 @@ const styles = StyleSheet.create({
     marginLeft: 10, 
   },
   DiaryCard: { 
-    backgroundColor: "#f2f4f8ff", 
+    backgroundColor: "#fff", 
     borderRadius: 10, 
     padding: 15, 
     marginBottom: 15, 
-    borderWidth: 0.5,           
-    borderColor: "#066AFF"
+    borderWidth: 0.7,           
+    borderColor: "#006989"
   },
   DiaryCardEmpty: { 
     backgroundColor: "#f2f4f8ff", 
@@ -481,15 +479,17 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   Input: { 
-    backgroundColor: "#f4f4f4", 
+    backgroundColor: "#f2f4f8ff", 
     padding: 15, 
     borderRadius: 10, 
     marginBottom: 15,
     fontSize: 15,
     color: 'black',
+    borderWidth: 0.7,           
+    borderColor: "#006989"
   },
   BodyInput: { 
-    backgroundColor: "#f4f4f4", 
+    backgroundColor: "#f2f4f8ff", 
     padding: 15, 
     borderRadius: 10, 
     flex: 1, 
@@ -497,6 +497,8 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     fontSize: 15,
     color: 'black',
+    borderWidth: 0.7,           
+    borderColor: "#006989"
   },
   ButtonRow: { 
     flexDirection: "row", 

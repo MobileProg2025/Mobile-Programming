@@ -1,4 +1,4 @@
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import { Text } from "react-native";
 
@@ -15,7 +15,7 @@ export default function TabsLayout() {
           height: 70,
           paddingBottom: 30,
           paddingTop: 10,
-          backgroundColor: 'white',        
+          backgroundColor: '#fbfcffff',        
         },
         tabBarBadgeStyle: {
           fontSize: 12,
@@ -41,7 +41,7 @@ export default function TabsLayout() {
         name="diary"
         options={{
           tabBarIcon: ({ color }) => (
-            <MaterialIcons name="create" size={25} color={color} />
+            <Ionicons name="create" size={25} color={color} />
           ),
           tabBarLabel: ({ focused, color }) =>
             focused ? (

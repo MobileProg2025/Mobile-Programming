@@ -1,55 +1,72 @@
-import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React from "react";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const Menu = () => {
   const navigation = useNavigation();
 
   return (
-      <View style={styles.Container}>
-        <Text style={styles.HeaderText}>MENU</Text>
-        
-        <TouchableOpacity style={styles.option}>
-          <Text style={styles.optionText}>Settings</Text>
-          <Ionicons name="chevron-forward" size={20} color="gray" />
-        </TouchableOpacity>
-        
-        <TouchableOpacity style={styles.option}>
-          <Text style={styles.optionText}>Trash</Text>
-          <Ionicons name="chevron-forward" size={20} color="gray" />
-        </TouchableOpacity>
-        
-      </View>
+    <View style={styles.container}>
+      <Text style={styles.title}>Menu</Text>
+
+      <TouchableOpacity
+        style={styles.menuItem}
+        activeOpacity={0.7}
+        onPress={() => navigation.navigate("settings")}
+      >
+        <Ionicons name="settings-outline" size={22} color="#066AFF" />
+        <Text style={styles.menuText}>Settings</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.menuItem}
+        activeOpacity={0.7}
+        onPress={() => navigation.navigate("trash")}
+      >
+        <Ionicons name="trash-outline" size={22} color="#d9534f" />
+        <Text style={styles.menuText}>Trash</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
-export default Menu;
-
 const styles = StyleSheet.create({
-  Container: { 
-    flex: 1, 
-    backgroundColor: "white", 
-    paddingTop: 55, 
-    paddingHorizontal: 20, 
+  container: {
+    flex: 1,
+    backgroundColor: "#fbfcffff",
+    paddingTop: 60,
+    paddingHorizontal: 20,
   },
-  HeaderText: {
-    textAlign: 'center',
+  title: {
     fontSize: 25,
-    fontWeight: 'bold',
-    marginBottom: 15,
-    color: 'black'
+    fontWeight: "bold",
+    marginBottom: 30,
+    color: "black",
   },
-  option: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: 10,
+  menuItem: {
+    backgroundColor: "#ffffff",
+    borderRadius: 10,
+    borderWidth: 1, 
+    borderColor: "#006989", 
     paddingVertical: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
+    paddingHorizontal: 18,
+    marginBottom: 15,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    shadowColor: "transparent",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0,
+    shadowRadius: 0,
+    elevation: 0,
   },
-  optionText: {
-    fontSize: 19,
-    color: 'black',
+  menuText: {
+    flex: 1,
+    fontSize: 16,
+    color: "black",
+    marginLeft: 10,
   },
 });
+
+export default Menu;

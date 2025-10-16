@@ -107,7 +107,7 @@ const Media = () => {
 const styles = StyleSheet.create({
   container: { 
     flex: 1, 
-    backgroundColor: "white", 
+    backgroundColor: "#fbfcffff", 
     paddingTop: 55, 
     paddingHorizontal: 20 
   }, 

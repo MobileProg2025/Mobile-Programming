@@ -1,152 +1,86 @@
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { useEffect, useState } from "react";
-import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect } from "@react-navigation/native";
+import { useCallback, useState } from "react";
+import {
+  FlatList,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Modal,
+} from "react-native";
 import { Calendar } from "react-native-calendars";
 
 const STORAGE_KEY = "my_diaries";
 
 const Home = () => {
-  const route = useRoute();
   const navigation = useNavigation();
 
   const [selected, setSelected] = useState("");
   const [diaries, setDiaries] = useState([]);
   const [recents, setRecents] = useState([]);
   const [markedDates, setMarkedDates] = useState({});
+  const [isModalVisible, setIsModalVisible] = useState(false); // new modal state
 
-  // Load diaries initially
-  useEffect(() => {
-    const loadDiaries = async () => {
-      try {
-        const saved = await AsyncStorage.getItem(STORAGE_KEY);
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          setDiaries(parsed);
+  const loadDiaries = async () => {
+    try {
+      const saved = await AsyncStorage.getItem(STORAGE_KEY);
+      const parsed = saved ? JSON.parse(saved) : [];
+      setDiaries(parsed);
 
-          // recents
-          const sorted = parsed.slice(0, 3).map((d) => ({
-            id: d.id,
-            title: d.title,
-            dateTime: `${d.date} ${d.time}`,
-          }));
-          setRecents(sorted);
-
-          // dots
-          const marks = {};
-          parsed.forEach((d) => {
-            marks[d.date] = { marked: true, dotColor: "#066AFF" };
-          });
-          setMarkedDates(marks);
-        }
-      } catch (e) {
-        console.log("Error loading diaries", e);
-      }
-    };
-    loadDiaries();
-  }, []);
-
-  // Handle navigation params
-  useEffect(() => {
-    // CREATE
-    if (route.params?.newDiary) {
-      const newDiary = route.params.newDiary;
-      setDiaries((prev) => [newDiary, ...prev]);
-
-      setMarkedDates((prev) => ({
-        ...prev,
-        [newDiary.date]: { marked: true, dotColor: "#066AFF" },
+      // Recents
+      const sorted = parsed.slice(0, 3).map((d) => ({
+        id: d.id,
+        title: d.title,
+        dateTime: `${d.date} ${d.time}`,
       }));
+      setRecents(sorted);
 
-      setRecents((prev) => {
-        const updated = [
-          { id: newDiary.id, title: newDiary.title, dateTime: `${newDiary.date} ${newDiary.time}` },
-          ...prev,
-        ];
-        return updated.slice(0, 3);
+      // Dots
+      const marks = {};
+      parsed.forEach((d) => {
+        marks[d.date] = { marked: true, dotColor: "#066AFF" };
       });
-
-      navigation.setParams({ newDiary: undefined });
+      setMarkedDates(marks);
+    } catch (e) {
+      console.log("Error loading diaries", e);
     }
+  };
 
-    // UPDATE
-    if (route.params?.updatedDiary) {
-      const updatedDiary = route.params.updatedDiary;
+  useFocusEffect(
+    useCallback(() => {
+      loadDiaries();
+    }, [])
+  );
 
-      setDiaries((prev) => {
-        const existing = prev.find((d) => d.id === updatedDiary.id);
-        const finalDate = updatedDiary.date ?? existing?.date ?? "";
-        const finalTime = updatedDiary.time ?? existing?.time ?? "";
+  const diariesForDay = diaries
+    .filter((d) => d.date === selected)
+    .slice(0, 3); // limit to 3
 
-        const updatedArr = prev.map((d) =>
-          d.id === updatedDiary.id
-            ? { ...d, ...updatedDiary, date: finalDate, time: finalTime }
-            : d
-        );
-
-        setRecents((prevRec) =>
-          prevRec.map((item) =>
-            item.id === updatedDiary.id
-              ? { ...item, title: updatedDiary.title, dateTime: `${finalDate} ${finalTime}` }
-              : item
-          )
-        );
-
-        return updatedArr;
-      });
-
-      navigation.setParams({ updatedDiary: undefined });
-    }
-
-    // DELETE 
-    if (route.params?.deletedDiaryId) {
-      const syncAfterDelete = async () => {
-        try {
-          const saved = await AsyncStorage.getItem(STORAGE_KEY);
-          const parsed = saved ? JSON.parse(saved) : [];
-          setDiaries(parsed);
-
-          // recents
-          const sorted = parsed.slice(0, 3).map((d) => ({
-            id: d.id,
-            title: d.title,
-            dateTime: `${d.date} ${d.time}`,
-          }));
-          setRecents(sorted);
-
-          // dots
-          const marks = {};
-          parsed.forEach((d) => {
-            marks[d.date] = { marked: true, dotColor: "#066AFF" };
-          });
-          setMarkedDates(marks);
-        } catch (e) {
-          console.log("Error syncing after delete", e);
-        }
-      };
-
-      syncAfterDelete();
-      navigation.setParams({ deletedDiaryId: undefined });
-    }
-  }, [route.params?.newDiary, route.params?.updatedDiary, route.params?.deletedDiaryId]);
-
-  const diariesForDay = diaries.filter((d) => d.date === selected);
+  const allDiariesForDay = diaries
+    .filter((d) => d.date === selected)
+    .sort(
+      (a, b) =>
+        new Date(`${b.date} ${b.time}`) - new Date(`${a.date} ${a.time}`)
+    );
 
   return (
     <ScrollView style={styles.container} contentContainerStyle={{ flexGrow: 1, paddingBottom: 50 }}>
       {/* Header */}
       <View style={styles.Header}>
-        <TouchableOpacity onPress= {() => navigation.navigate('menu')}>
+        <TouchableOpacity onPress={() => navigation.navigate("menu")}>
           <Ionicons name="menu" size={35} color="black" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('profile')}>
+        <TouchableOpacity onPress={() => navigation.navigate("profile")}>
           <FontAwesome name="user-circle" size={35} color="grey" />
         </TouchableOpacity>
       </View>
 
       {/* Calendar */}
-      <View style={styles.Card}> 
+      <View style={styles.Card}>
         <Text style={styles.SectionTitleCalendar}>Calendar</Text>
         <Calendar
           onDayPress={(day) => setSelected(day.dateString)}
@@ -156,22 +90,34 @@ const Home = () => {
               ? {
                   [selected]: {
                     selected: true,
-                    selectedColor: "#066AFF",
+                    selectedColor: "#006989",
                     marked: markedDates[selected]?.marked,
-                    dotColor: "#066AFF",
+                    dotColor: "#ffffffff",
                   },
                 }
               : {}),
           }}
-          theme={{ todayTextColor: "#066AFF", selectedDayBackgroundColor: "#066AFF", arrowColor: "#066AFF" }}
-          style={{ borderRadius: 10, elevation: 1, borderWidth: 0.5, borderColor: "#066AFF"}}
+          theme={{
+            todayTextColor: "#066AFF",
+            selectedDayBackgroundColor: "#006989",
+            arrowColor: "#006989",
+          }}
+          style={{ borderRadius: 7, elevation: 1, borderWidth: 0.7, borderColor: "#006989" }}
         />
       </View>
 
       {/* On This Day */}
       {diariesForDay.length > 0 && (
         <View style={styles.Card}>
-          <Text style={styles.OnThisDayTitle}>On this day</Text>
+          <View style={styles.OnThisDayHeader}>
+            <Text style={styles.OnThisDayTitle}>On this day</Text>
+            {allDiariesForDay.length > 3 && (
+              <TouchableOpacity onPress={() => setIsModalVisible(true)}>
+                <Text style={styles.ViewAllText}>View All</Text>
+              </TouchableOpacity>
+            )}
+          </View>
+
           <FlatList
             data={diariesForDay}
             keyExtractor={(item) => item.id}
@@ -179,7 +125,9 @@ const Home = () => {
             renderItem={({ item }) => (
               <View style={styles.DiaryCard}>
                 <Text style={styles.DiaryTitle}>{item.title}</Text>
-                <Text style={styles.DiaryDate}>{item.date} {item.time}</Text>
+                <Text style={styles.DiaryDate}>
+                  {item.date} {item.time}
+                </Text>
               </View>
             )}
           />
@@ -200,6 +148,42 @@ const Home = () => {
           ))
         )}
       </View>
+
+      {/* Modal for "View All" */}
+      <Modal
+        visible={isModalVisible}
+        transparent
+        animationType="slide"
+        onRequestClose={() => setIsModalVisible(false)}
+      >
+        <View style={styles.ModalContainer}>
+          <View style={styles.ModalContent}>
+            <View style={styles.ModalHeader}>
+              <Text style={styles.ModalTitle}>All Diaries ({selected})</Text>
+              <TouchableOpacity onPress={() => setIsModalVisible(false)}>
+                <Ionicons name="close" size={24} color="black" />
+              </TouchableOpacity>
+            </View>
+
+            {allDiariesForDay.length === 0 ? (
+              <Text style={styles.Placeholder}>No diaries on this date</Text>
+            ) : (
+              <FlatList
+                data={allDiariesForDay}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => (
+                  <View style={styles.DiaryCard}>
+                    <Text style={styles.DiaryTitle}>{item.title}</Text>
+                    <Text style={styles.DiaryDate}>
+                      {item.date} {item.time}
+                    </Text>
+                  </View>
+                )}
+              />
+            )}
+          </View>
+        </View>
+      </Modal>
     </ScrollView>
   );
 };
@@ -207,93 +191,112 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: { 
     flex: 1, 
-    backgroundColor: "white", 
+    backgroundColor: "#fbfcffff", 
     paddingTop: 55, 
-    paddingHorizontal: 20,
-  }, 
+    paddingHorizontal: 20 
+  },
   Header: { 
     flexDirection: "row", 
     justifyContent: "space-between", 
     alignItems: "center", 
-    marginBottom: 15,
+    marginBottom: 15 
   },
-  Card: { 
-    backgroundColor: "#f2f4f8ff", 
-    borderRadius: 10, 
-    padding: 15, 
-    marginBottom: 20, 
-    shadowColor: "#000", 
-    shadowOffset: { width: 0, height: 2 }, 
-    shadowOpacity: 0.5, 
-    shadowRadius: 5, 
-    //elevation: 2, 
-    borderWidth: 0.5,           
-    borderColor: "#066AFF"
+  Card: {
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    padding: 15,
+    marginBottom: 20,
+    borderWidth: 0.7,
+    borderColor: "#006989",
   },
   SectionTitleCalendar: { 
     fontSize: 20, 
     fontWeight: "bold", 
     marginBottom: 10, 
-    textAlign: "center",
-    color: 'black',
+    textAlign: "center", 
+    color: "black" 
   },
   SectionTitleRecent: { 
     fontSize: 20, 
     fontWeight: "bold", 
-    marginBottom: 10,
-    color: 'black', 
+    marginBottom: 10, 
+    color: "black" 
+  },
+  OnThisDayHeader: { 
+    flexDirection: "row", 
+    justifyContent: "space-between", 
+    alignItems: "center", 
+    marginBottom: 10 
   },
   OnThisDayTitle: { 
     fontSize: 20, 
     fontWeight: "bold", 
+    color: "black" 
+  },
+  ViewAllText: { 
+    fontSize: 14, 
+    color: "#066AFF", 
+    fontWeight: "bold" 
+  },
+  DiaryCard: {
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    padding: 15,
     marginBottom: 10,
-    color: 'black',
+    borderWidth: 0.7,
+    borderColor: "#006989",
   },
-  DiaryCard: { 
-    backgroundColor: "#fff", 
-    borderRadius: 10, 
-    padding: 15, 
-    marginBottom: 10, 
-    borderWidth: 1, 
-    borderColor: "#E0E0E0", 
-    borderWidth: 0.5,           
-    borderColor: "#066AFF"
-  },
-  DiaryTitle: { 
-    fontSize: 16, 
-    fontWeight: "bold",
-    color: 'black',
-  },
-  DiaryDate: { 
-    fontSize: 12, 
-    color: "#808080",
-  },
-  RecentItem: { 
-    backgroundColor: "#fff", 
-    borderRadius: 10, 
-    padding: 15, 
-    marginBottom: 10, 
-    borderWidth: 1, 
-    borderColor: "#E0E0E0",
-    borderWidth: 0.5,           
-    borderColor: "#066AFF"
+  DiaryTitle: { fontSize: 16, fontWeight: "bold", color: "black" },
+  DiaryDate: { fontSize: 12, color: "#808080" },
+  RecentItem: {
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    padding: 15,
+    marginBottom: 10,
+    borderWidth: 0.7,
+    borderColor: "#006989",
   },
   RecentTitle: { 
     fontSize: 16, 
     fontWeight: "bold", 
-    marginBottom: 5,
-    color: 'black',
+    marginBottom: 5, 
+    color: "black" 
   },
   RecentDate: { 
     fontSize: 12, 
-    color: "#808080" ,
+    color: "#808080" 
   },
   Placeholder: { 
     fontSize: 15, 
     color: "#808080", 
     fontStyle: "italic", 
     textAlign: "center", 
-    paddingVertical: 20, 
+    paddingVertical: 20 
+  },
+
+  // Modal Styles
+  ModalContainer: { 
+    flex: 1, 
+    justifyContent: "flex-end", 
+    backgroundColor: "rgba(0,0,0,0.5)" 
+  },
+  ModalContent: {
+    backgroundColor: "#fff",
+    padding: 20,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    maxHeight: "80%",
+  },
+  ModalHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 15,
+  },
+  ModalTitle: { 
+    fontSize: 18, 
+    fontWeight: "bold", 
+    color: "black" 
   },
 });
 
