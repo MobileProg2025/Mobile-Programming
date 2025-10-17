@@ -266,6 +266,7 @@ const styles = StyleSheet.create({
   RecentTitle: { 
     fontSize: 16, 
     fontWeight: "bold", 
+    marginBottom: 5, 
     color: "black" 
   },
   RecentDate: { 
