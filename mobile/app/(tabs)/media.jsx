@@ -86,7 +86,7 @@ const Media = () => {
           />
         )}
 
-      {/* Fullscreen Preview */}
+      {/* Image Preview */}
       <Modal isVisible={!!previewUri} onBackdropPress={() => setPreviewUri(null)}>
         <View style={styles.previewModal}>
           {previewUri && (
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-
+  //Image Preview
   previewImage: { 
     width: "90%", 
     height: "70%", 
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     top: 40, 
     right: 20, 
   },
-  
+  //No image available 
   noImage: {
     flex: 1,
     justifyContent: 'center',

@@ -2,7 +2,6 @@ import { FontAwesome, Ionicons, MaterialCommunityIcons } from "@expo/vector-icon
 import { useRouter } from 'expo-router';
 import {
   Alert,
-  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -18,23 +17,12 @@ const MOCK_STATS = {
   username: "User's Name",
 };
 
+// **StatItem component has been removed**
 
-const StatItem = ({ label, value, isLarge = false }) => (
-  <View style={[styles.statItem, isLarge ? styles.TotalEntriesStat : styles.StreakStat]}>
-    <Text style={isLarge ? styles.TotalEntriesValue : styles.StreakValue}>
-      {value.toLocaleString()}
-    </Text>
-    <Text style={isLarge ? styles.TotalEntriesLabel : styles.StreakLabel}>
-      {label}
-    </Text>
-  </View>
-);
-
-//Profile
 const Profile = () => {
   const router = useRouter();
 
-  // Function to handle log out and redirect to the Login screen
+  // Logout function
   const handleLogout = () => {
     Alert.alert(
       "Log Out",
@@ -55,70 +43,74 @@ const Profile = () => {
 
   return (
     
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      
+      <Text style={styles.Header}>PROFILE</Text>
+
+      <View style={styles.profileSection}>
+        <View style={styles.profileImageContainer}>
+          <FontAwesome name="user-circle" size={100} color="#808080" />
+        </View>
+        <Text style={styles.username}>{MOCK_STATS.username}</Text>
+        <TouchableOpacity style={styles.editNameButton}>
+          <Ionicons name="pencil-outline" size={16} color="black" />
+          <Text style={styles.editNameText}>Edit</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.statsContainer}>
+        {/* Total Entries*/}
+        <View style={[styles.statItemBase, styles.TotalEntriesStat]}>
+          <Text style={styles.TotalEntriesValue}>
+            {MOCK_STATS.totalEntries.toLocaleString()}
+          </Text>
+          <Text style={styles.TotalEntriesLabel}>
+            Total Entries
+          </Text>
+        </View>
         
-        <Text style={styles.Header}>PROFILE</Text>
-
-        <View style={styles.profileSection}>
-          <View style={styles.profileImageContainer}>
-            <FontAwesome name="user-circle" size={100} color="#808080" />
+        <View style={styles.statsRowTwo}>
+          {/* Day Streak */}
+          <View style={[styles.statItemBase, styles.StreakStat]}>
+            <Text style={styles.StreakValue}>
+              {MOCK_STATS.dayStreak.toLocaleString()}
+            </Text>
+            <Text style={styles.StreakLabel}>
+              Day Streak
+            </Text>
           </View>
-          <Text style={styles.username}>{MOCK_STATS.username}</Text>
-          <TouchableOpacity style={styles.editNameButton}>
-            <Ionicons name="pencil-outline" size={16} color="black" />
-            <Text style={styles.editNameText}>Edit</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* Journal Stats Section */}
-        <View style={styles.statsContainer}>
-          {/* Total Entries */}
-          <StatItem 
-            label="Total Entries" 
-            value={MOCK_STATS.totalEntries} 
-            isLarge={true} 
-          />
           
-          {/* Day Streak and Longest Streak */}
-          <View style={styles.statsRowTwo}>
-            <StatItem 
-              label="Day Streak" 
-              value={MOCK_STATS.dayStreak} 
-              isLarge={false} 
-            />
-            <StatItem 
-              label="Longest Streak" 
-              value={MOCK_STATS.longestStreak} 
-              isLarge={false} 
-            />
-          </View>
-
-          {/* Total Words Written */}
-          <View style={styles.wordsWrittenContainer}>
-            <Text style={styles.wordsWrittenText}>Total Words Written</Text>
-            <View style={styles.wordsWrittenLine} />
+          {/* Longest Streak */}
+          <View style={[styles.statItemBase, styles.StreakStat]}>
+            <Text style={styles.StreakValue}>
+              {MOCK_STATS.longestStreak.toLocaleString()}
+            </Text>
+            <Text style={styles.StreakLabel}>
+              Longest Streak
+            </Text>
           </View>
         </View>
 
-        {/* Log Out */}
-        <View style={styles.logoutContainer}>
-            <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-              <MaterialCommunityIcons name="logout" size={24} color="black" /> 
-              <Text style={styles.logoutText}>LOG OUT</Text>
-            </TouchableOpacity>
+        {/* Total Words Written */}
+        <View style={styles.wordsWrittenContainer}>
+          <Text style={styles.wordsWrittenText}>Total Words Written</Text>
+          <View style={styles.wordsWrittenLine} />
         </View>
       </View>
-    </SafeAreaView>
+
+      {/* Log Out */}
+      <View style={styles.logoutContainer}>
+          <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+            <MaterialCommunityIcons name="logout" size={24} color="black" /> 
+            <Text style={styles.logoutText}>LOG OUT</Text>
+          </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: "white",
-  },
   container: { 
     flex: 1, 
     backgroundColor: "white", 
@@ -155,7 +147,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderBottomWidth: 1, 
     borderColor: 'black',
-    width: '30%',
+    width: '80%',
     justifyContent: 'center',
     marginTop: 5,
   },
@@ -174,7 +166,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginTop: 15,
   },
-  statItem: {
+  statItemBase: { 
     alignItems: "center",
     justifyContent: 'center',
     backgroundColor: "#f4f4f4", 
@@ -193,16 +185,16 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "black",
   },
+  StreakValue: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "black",
+  },
   TotalEntriesLabel: {
     fontSize: 15,
     color: "black",
     textAlign: 'center',
     marginTop: 5,
-  },
-  StreakValue: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "black",
   },
   StreakLabel: {
     fontSize: 14,
