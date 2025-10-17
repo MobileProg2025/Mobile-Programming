@@ -17,8 +17,6 @@ const MOCK_STATS = {
   username: "User's Name",
 };
 
-// **StatItem component has been removed**
-
 const Profile = () => {
   const router = useRouter();
 
