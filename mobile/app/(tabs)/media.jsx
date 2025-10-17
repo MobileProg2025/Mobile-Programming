@@ -56,7 +56,7 @@ const Media = () => {
         <Ionicons name="menu" size={35} color="black" />
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('profile')}>
-        <FontAwesome name="user-circle" size={35} color="grey" />
+        <FontAwesome name="user-circle" size={35} color="black" />
       </TouchableOpacity>
     </View>
     {media.length === 0 ?(

@@ -75,7 +75,7 @@ const Home = () => {
           <Ionicons name="menu" size={35} color="black" />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate("profile")}>
-          <FontAwesome name="user-circle" size={35} color="grey" />
+          <FontAwesome name="user-circle" size={35} color="black" />
         </TouchableOpacity>
       </View>
 
@@ -241,17 +241,24 @@ const styles = StyleSheet.create({
   DiaryCard: {
     backgroundColor: "#fff",
     borderRadius: 10,
-    padding: 15,
+    padding: 10,
     marginBottom: 10,
     borderWidth: 0.7,
     borderColor: "#006989",
   },
-  DiaryTitle: { fontSize: 16, fontWeight: "bold", color: "black" },
-  DiaryDate: { fontSize: 12, color: "#808080" },
+  DiaryTitle: { 
+    fontSize: 16, 
+    fontWeight: "bold", 
+    color: "black" 
+  },
+  DiaryDate: { 
+    fontSize: 12, 
+    color: "#808080" 
+  },
   RecentItem: {
     backgroundColor: "#fff",
     borderRadius: 10,
-    padding: 15,
+    padding: 10,
     marginBottom: 10,
     borderWidth: 0.7,
     borderColor: "#006989",
@@ -259,7 +266,6 @@ const styles = StyleSheet.create({
   RecentTitle: { 
     fontSize: 16, 
     fontWeight: "bold", 
-    marginBottom: 5, 
     color: "black" 
   },
   RecentDate: { 

@@ -15,7 +15,7 @@ const Menu = () => {
         activeOpacity={0.7}
         onPress={() => navigation.navigate("settings")}
       >
-        <Ionicons name="settings-outline" size={22} color="#066AFF" />
+        <Ionicons name="settings-outline" size={22} color="black" />
         <Text style={styles.menuText}>Settings</Text>
       </TouchableOpacity>
 
@@ -24,7 +24,7 @@ const Menu = () => {
         activeOpacity={0.7}
         onPress={() => navigation.navigate("trash")}
       >
-        <Ionicons name="trash-outline" size={22} color="#d9534f" />
+        <Ionicons name="trash-outline" size={22} color="black" />
         <Text style={styles.menuText}>Trash</Text>
       </TouchableOpacity>
     </View>

@@ -166,7 +166,7 @@ const Diary = () => {
               <Ionicons name="menu" size={35} color="black" />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('profile')}>
-              <FontAwesome name="user-circle" size={35} color="grey" />
+              <FontAwesome name="user-circle" size={35} color="black" />
             </TouchableOpacity>
           </View>
 
@@ -425,7 +425,8 @@ const styles = StyleSheet.create({
     padding: 15, 
     marginBottom: 15, 
     borderWidth: 0.7,           
-    borderColor: "#006989"
+    borderColor: "#006989",
+    elevation: 1,
   },
   DiaryCardEmpty: { 
     backgroundColor: "#f2f4f8ff", 
