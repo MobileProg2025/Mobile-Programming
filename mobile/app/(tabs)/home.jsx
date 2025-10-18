@@ -1,16 +1,15 @@
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from "@react-navigation/native";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { useCallback, useState } from "react";
 import {
   FlatList,
+  Modal,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  Modal,
 } from "react-native";
 import { Calendar } from "react-native-calendars";
 
@@ -23,7 +22,7 @@ const Home = () => {
   const [diaries, setDiaries] = useState([]);
   const [recents, setRecents] = useState([]);
   const [markedDates, setMarkedDates] = useState({});
-  const [isModalVisible, setIsModalVisible] = useState(false); // new modal state
+  const [isModalVisible, setIsModalVisible] = useState(false); 
 
   const loadDiaries = async () => {
     try {

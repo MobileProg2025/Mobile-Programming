@@ -23,6 +23,7 @@ const Signup = () => {
         style={styles.HomeLogo}
         />
       </View>
+      
       <View style={styles.NumberContainer}>
         <Text style={styles.enterNumberText}>Enter your mobile number</Text>
         <View style={styles.enterNumberContainer}>
@@ -40,6 +41,7 @@ const Signup = () => {
             onChangeText={setPhoneNumber}
           />
         </View>
+
         <CountryPicker
           show={show}
           pickerButtonOnPress={(item) => {
@@ -62,7 +64,7 @@ const Signup = () => {
           searchMessage="Search country"
         />
       </View>
-
+      {/*Email Container */}
       <View style={styles.emailContainer}>
         <Text style={styles.emailAddressText}>Enter email address</Text>
         <View style={styles.emailAddressContainer}>
@@ -74,7 +76,7 @@ const Signup = () => {
           />
         </View>
       </View>
-
+      {/*Password Container */}
       <View style={styles.passContainer}>
         <Text style={styles.passwordText}>Enter password</Text>
         <View style={styles.passwordContainer}>

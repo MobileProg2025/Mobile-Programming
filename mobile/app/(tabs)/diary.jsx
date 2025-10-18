@@ -77,7 +77,7 @@ const Diary = () => {
       Alert.alert("Empty", "Please enter title or body.");
       return;
     }
-
+    //Edit
     if (mode === "edit" && editingDiaryId) {
       const existing = diaries.find((d) => d.id === editingDiaryId);
       const updatedDiary = {
